@@ -1,0 +1,12 @@
+---
+- name: install nginx
+  hosts: servers
+  become: yes
+  tasks:
+    - name: install nginx on VMs
+      apt:
+        name:
+          - nginx
+    - name: debug
+      ansible.builtin.debug:
+        msg: "{{ ansible_facts.all_ipv4_addresses }}"
