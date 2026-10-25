@@ -1,0 +1,10 @@
+server {
+    listen 80;
+    server_name example.ru;
+    access_log /var/log/nginx/example.ru-access;
+    error_log /var/log/nginx/example.ru-error;
+
+    location / {
+        return 200 "From $server_addr\n";
+    }
+}

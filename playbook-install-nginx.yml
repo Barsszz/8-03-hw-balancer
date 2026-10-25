@@ -7,6 +7,27 @@
       apt:
         name:
           - nginx
+
+    - name: deploy nginx.conf file from template
+      ansible.builtin.template:
+        src: templates/nginx_example.conf.j2
+        dest: /etc/nginx/conf.d/example.ru.conf
+        owner: root
+        group: root
+        mode: '0644'
+      notify: reload nginx
+
+    - name: disable default nginx site
+      ansible.builtin.file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+      notify: reload nginx
+
     - name: debug
       ansible.builtin.debug:
         msg: "{{ ansible_facts.all_ipv4_addresses }}"
+  handlers:
+    - name: reload nginx
+      ansible.builtin.service:
+        name: nginx
+        state: reloaded     

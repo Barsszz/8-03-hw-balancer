@@ -39,7 +39,7 @@ resource "yandex_compute_instance" "vm" {
   }
 
   metadata = {
-    ssh-keys = "debian:${file("~/.ssh/ssh-key-1788708402110.pub")}"
+    ssh-keys = "ubuntu:${file("~/.ssh/ssh-key-1788708402110.pub")}"
   }
 
   network_interface {
